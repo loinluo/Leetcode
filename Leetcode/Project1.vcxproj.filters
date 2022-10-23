@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="704二分查找.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="34排序数组中查找第一和最后_二分查找.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="209长度最小的子数组_滑动窗口.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="904水果成篮_滑动窗口.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="76最小覆盖子串_滑动窗口.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="59螺旋矩阵.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="54螺旋矩阵.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="27移除元素_双指针.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="26删除有序数组中的重复项_双指针.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="283移动零_双指针.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="203移除链表元素_虚拟头结点.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="24两两交换链表中的节点_虚拟头结点.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="19删除链表的倒数第n个结点_虚拟头结点_双指针.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="142环链表_双指针.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="49字母异位词分组_哈希表.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="349两个数组的交集_哈希表.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="350两个数组的交集2_哈希表.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="454四数相加_哈希表.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="15三数之和_双指针.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="18四数之和_双指针.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="344反转字符串.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="151颠倒字符串中的单词_双指针.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="206反转链表_双指针.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="28实现strStr_KMP.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="459重复子串_KMP.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="977有序数组的平方_ 双指针.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="232用栈实现队列.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="225队列实现栈.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="20有效的括号.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="1047删除字符串中的所有相邻重复项_栈和队列.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="150逆波兰表达式求值_栈.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="239滑动窗口最大值.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="347前k个高频元素.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
