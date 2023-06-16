@@ -26,14 +26,12 @@ int a[][] = {
    vector<int> a = {1, 1, 1, 1, 1};
    vector<int> a; //空一维数组
    ```
-
 2. ##### 数组地址初始化
 
    ```c++
    int a[] = { 3,3,3,1,2 };
    vector<int> b(a, a + sizeof(a) / sizeof(int)); //a的第一个元素到a的最后一个元素
    ```
-
 3. ##### 二维数组
 
    ```c++
@@ -54,6 +52,15 @@ for (string& str: strs) // strs为字符串vector vector<string>
 ```c++
 #include<algorithm>
 sort(vector.begin(), vector.end()) // 将vector中开始元素到结束元素进行排序
+static bool cmp(const vector<int> &a, const vector<int> &b)
+{
+    if (a[0] == b[0])
+    {
+        return a[1] < b[1];
+    }
+    return a[0] > b[0];
+}
+sort(vector.begin(), vector.end(), cmp)
 ```
 
 #### 数组末尾添加元素a（append）
@@ -100,7 +107,11 @@ vector.pop_back();
 reverse(vector.begin(), vector.end());
 ```
 
+#### 数组插入
 
+```c++
+vector.insert(res.begin() + pos, a);
+```
 
 ### 1.1 二分查找
 
@@ -112,6 +123,7 @@ reverse(vector.begin(), vector.end());
 * while循环，条件为左小于等于右
 * 循环中定义中指针为左右中点
 * 将中指针与目标比较，根据比较结果更改左指针或右指针的值
+
 ```c++
 int left = 0;
 int right = nums.size() - 1;
@@ -130,7 +142,7 @@ while (left <= right) {
 
 ### 1.2 双指针
 
-**可用于<u>删除数组/链表内元素</u>，<u>将元素移动到数组/链表后边</u> <u>反转链表</u>，<u>环链表</u>，<u>n数之和</u>等，时间复杂度O(n)**
+**可用于 `<u>`删除数组/链表内元素 `</u>`，`<u>`将元素移动到数组/链表后边 `</u>` `<u>`反转链表 `</u>`，`<u>`环链表 `</u>`，`<u>`n数之和 `</u>`等，时间复杂度O(n)**
 
 15 18 19 26 27 142 151 206 283
 
@@ -138,6 +150,7 @@ while (left <= right) {
 * 快指针数组内循环
 * 如果不需要删除或后移，用快指针给慢指针赋值，并且将慢指针后移
 * 否则只有快指针后移
+
 ```c++
 int slow = 0, fast = 0;
 for (fast; fast < nums.size(); fast++ )
@@ -158,6 +171,7 @@ for (fast; fast < nums.size(); fast++ )
 * 定义窗口的开始和结束边界
 * 右边界数组内循环
 * 找到右边界后，while循环，寻找满足条件的左边界的最大值
+
 ```c++
 int result = INT32_MAX;
 int sum = 0;
@@ -180,10 +194,11 @@ for (end; end < nums.size(); end++) {
 * 定义每一圈的起始元素，剩余行列数
 * while循环，每一圈剩余行列数各减2
 * 循环中按照四边顺序进行赋值，注意区间开闭
+
 ```c++
 int m = matrix.size();
 int n = matrix[0].size();
-int row = 0, column = 0;        
+int row = 0, column = 0;  
 vector<int> result(m * n, 0);
 int count = 0;
 while (m > 0 && n > 0) {
@@ -202,7 +217,7 @@ while (m > 0 && n > 0) {
         for (j; j > column; j--) {
             result[count++] = matrix[i][j];
         }
-    }            
+    }    
     if (n == 1 && m != 1) {
         result[count++] = matrix[i][j];
     }
@@ -246,15 +261,14 @@ ListNode* ptr = head;
 
 ### 2.1 虚拟头结点
 
-19 24 203 
+19 24 203
 
 将原链表的头结点与后面普通节点的地位等同，不必单独考虑
 
 * 定义一个新的虚拟结点，新节点的next指向原链表头结点
-
 * cur从虚拟头结点开始
-
 * 返回虚拟头结点的next也就是原head
+
 ```c++
 ListNode* dummyHead = new ListNode(0); 
 dummyHead->next = head; 
@@ -478,9 +492,137 @@ void backtracking(参数) {
 - 求解每一个子问题的最优解
 - 将局部最优解堆叠成全局最优解
 
+## 9.动态规划
+
+* 确定dp数组以及下标的含义
+  * 数组的值为状态量
+* 确定状态转移方程，即递推关系
+* dp数组初始化
+* 确定遍历顺序
+* 举例推导dp数组
+
+### 背包问题
+
+* 二维数组
+
+​	按顺序取到第i个物品 装到容量为j的背包的最大价值
+
+​	`dp[i][j] = max(dp[i-1][j], value[i] + dp[i-1][j-weight[i]])`
+
+​	即不装该物品以及装该物品取得的最大值
+
+​	遍历顺序无关紧要，先遍历物品或者重量都可以，因为前面的最大值来源于左上位置
+
+![1679951401911](image/Leetcode刷题总结/1679951401911.png)
+
+* 一维滚动数组
+
+  本质：将`d[i-1]`拷贝到`d[i]`
+
+  `dp[j] = max(dp[j], dp[j - weight[i]] + value[i])`
+
+
+但是对于`j`需要从右向左进行遍历，否则左侧的值会被覆盖，我们可以保证右边的值始终比之前大
+
+* **给定容量，装满背包的最大价值**
+
+```cpp
+vector<int> dp(bagWeight + 1, 0);
+for(int i = 0; i < weight.size(); i++) { // 遍历物品
+    for(int j = bagWeight; j >= weight[i]; j--) { // 遍历背包容量
+        dp[j] = max(dp[j], dp[j - weight[i]] + value[i]); // dp[j]:从物品0-i中取总和为j重量物品的最大价值
+    }
+}
+```
+
+* **给定容量，是否能装满背包** - 416. 分割等和子集
+
+```cpp
+vector<int> dp(10001, 0);
+// 开始 01背包
+for(int i = 0; i < nums.size(); i++) {
+    for(int j = target; j >= nums[i]; j--) { // 每一个元素一定是不可重复放入，所以从大到小遍历
+        dp[j] = max(dp[j], dp[j - nums[i]] + nums[i]); // dp[j]:从物品0-i中取总和为j的数的最大和，重量和价值都为nums
+    }
+}
+// 集合中的元素正好可以凑成总和target
+if (dp[target] == target) {
+    return true;
+}
+```
+
+* **给定容量，将可能装** -1049.最后一块石头的重量II
+
+```cpp
+vector<int> dp(15001, 0);
+for (int i = 0; i < stones.size(); i++) { // 遍历物品
+    for (int j = target; j >= stones[i]; j--) { // 遍历背包
+        dp[j] = max(dp[j], dp[j - stones[i]] + stones[i]); // dp[j]:从物品0-i中取总和为j的数的最大和，重量和价值都为nums
+    }
+}
+return sum - dp[target] - dp[target];
+```
+
+* **给定容量，装满背包有几种方法** - 494.目标和
+
+```cpp
+vector<int> dp(bagSize + 1, 0);
+dp[0] = 1;
+for (int i = 0; i < nums.size(); i++) {
+    for (int j = bagSize; j >= nums[i]; j--) {
+        dp[j] += dp[j - nums[i]];  //dp[j]: 将0到i物品装满容量为j的包有dp[j]种方法
+    }
+}
+return dp[bagSize];
+```
+
+* **给定容量，最大物品个数** - 474.一和零
+
+```cpp
+vector<vector<int>> dp(m + 1, vector<int> (n + 1, 0)); // 默认初始化0
+for (string str : strs) { // 遍历物品
+	int oneNum = 0, zeroNum = 0;
+	for (char c : str) {
+		if (c == '0') zeroNum++;
+		else oneNum++;
+	}
+	for (int i = m; i >= zeroNum; i--) { // 遍历背包容量且从后向前遍历！
+		for (int j = n; j >= oneNum; j--) {
+			dp[i][j] = max(dp[i][j], dp[i - zeroNum][j - oneNum] + 1); //dp[i][j]:容量为i个0，j个1时，最大的物品个数为dp[i][j]个
+			}
+		}	
+	}
+	return dp[m][n];
+}
+```
+
+* **股票买卖最佳时机**
+
+```c++
+int maxProfit(int k, vector<int> &prices) {
+    int len = prices.size();
+    vector<vector<int>> dp(len, vector<int>(2 * k + 1));
+    for (int i = 1; i < 2 * k; i+=2) {
+        dp[0][i] = -prices[0]; //在第一天按照流程，不做操作为0，买入为负的价格，再卖出为零，再买入为新的负的价格
+    }
+    if (len > 1) {
+        for (int i = 1; i < len; ++i) {
+            dp[i][0] = 0; // 不做任何操作
+            for (int j = 1; j <= k; ++j) {
+                dp[i][2 * j - 1] = max(dp[i - 1][2 * j - 1], dp[i - 1][2 * j - 2] - prices[i]); //第i+1天第j次买入状态的最大值，由前i天的状态推出，前i天的最大值和当天在前一天的前一个状态重新执行买入操作进行比较
+                dp[i][2 * j] = max(dp[i - 1][2 * j], dp[i - 1][2 * j - 1] + prices[i]); //第i+1天第j次卖出状态的最大值
+            }
+        }
+    }
+    return dp[len - 1][2 * k];
+}
+```
+
+
+
 ## 通用语句
 
-### 条件赋值快速写法
+### 条件赋值快速写法(三元运算符)
 
 ```c++
 a = 条件 ？条件成立结果 ：条件不成立结果
@@ -492,10 +634,86 @@ a = 条件 ？条件成立结果 ：条件不成立结果
 this->函数名（变量）
 ```
 
-### 字符串转整型
+### 字符串与整型相互转化
 
 ```c++
-#include<string>
+#include <string>
 stoi(a); // a为整型
+to_string(a)； // a为字符串
+```
+
+### 获取命令行的输入
+
+bracket表示的二维整型数组
+
+```c++
+int findFirstBracket(string input) {
+    for (int i = 0; i < input.size(); i++) {
+        if (input[i] == '[') {
+            return i + 1;
+        }
+    }
+    return -1;
+}
+
+// read the string in the representation of bracket to a vector<vector<int>>
+vector<vector<int>> stringToVector(string input) {
+    vector<vector<int>> result;
+    // remove the first and last bracket
+    input = input.substr(1, input.size() - 2);
+    stringstream stringin(input);
+    string temp;
+    while (getline(stringin, temp, ']')) {
+        if (temp.size() > 0) {
+            // remove the first bracket
+            int index = findFirstBracket(temp);
+            temp = temp.substr(index, temp.size() - 1);
+            stringstream stringin2(temp);
+            int num;
+            vector<int> temp2;
+            while (getline(stringin2, temp, ',')) {
+                if (temp.size() > 0) {
+                    stringstream stringin3(temp);
+                    stringin3 >> num;
+                    temp2.push_back(num);
+                }
+            }
+            result.push_back(temp2);
+        }
+  
+    }
+    return result; 
+}
+
+int main() {
+    string input;
+    vector<vector<int>> grid;
+    getline(cin, input);
+    grid = stringToVector(input);
+}
+
+```
+
+整型数组 不含括号
+
+```c++
+#include <iostream>
+#include <vector>
+#include <string>
+#include <sstream>
+
+string input; //定义字符串input存放输入
+vector<vector<int>> arr; //定义二维数组arr存放转化为数字后的输入
+while (getline(cin, input)) { //将每行cin传给input
+    if (input.size() > 0){
+        stringstream stringin(input); //字符串流stringin，将input的空格隔开并转化为int
+        int num;
+        vector<int> a;
+        while (stringin >> num) {
+            a.push_back(num);
+        }
+        arr.push_back(a);
+    }
+}
 ```
 
